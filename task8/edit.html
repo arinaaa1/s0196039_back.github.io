@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Редактирование — Drupal-coder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .edit-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .edit-card {
+      background: rgba(26, 26, 58, 0.95);
+      border: 1px solid rgba(255, 107, 107, 0.3);
+      border-radius: 12px;
+      padding: 3rem;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    }
+
+    .edit-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .edit-header-logo img { height: 40px; }
+
+    .edit-user {
+      font-size: 0.85rem;
+      color: #999;
+    }
+
+    .edit-user strong { color: #ff6b6b; }
+
+    .edit-logout {
+      background: none;
+      border: 1px solid #444;
+      color: #999;
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: inherit;
+      margin-left: 0.75rem;
+      transition: all 0.3s;
+    }
+
+    .edit-logout:hover {
+      border-color: #ff6b6b;
+      color: #ff6b6b;
+    }
+
+    .edit-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 0.4rem;
+    }
+
+    .edit-subtitle {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 2rem;
+    }
+
+    .edit-field {
+      margin-bottom: 1.2rem;
+    }
+
+    .edit-field label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #ccc;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.4rem;
+    }
+
+    .edit-field input,
+    .edit-field textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid #444;
+      border-radius: 6px;
+      color: white;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+
+    .edit-field input:focus,
+    .edit-field textarea:focus {
+      outline: none;
+      border-color: #ff6b6b;
+    }
+
+    .edit-field textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    .edit-status {
+      padding: 0.75rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      margin-bottom: 1.2rem;
+      display: none;
+      text-align: center;
+    }
+
+    .edit-status.error {
+      background: rgba(231,76,60,0.2);
+      border: 1px solid #e74c3c;
+      color: #e74c3c;
+      display: block;
+    }
+
+    .edit-status.success {
+      background: rgba(46,204,113,0.2);
+      border: 1px solid #2ecc71;
+      color: #2ecc71;
+      display: block;
+    }
+
+    .edit-btn {
+      width: 100%;
+      padding: 0.85rem;
+      background: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.3s;
+      letter-spacing: 0.5px;
+    }
+
+    .edit-btn:hover { background: #ff4d4d; }
+    .edit-btn:disabled { background: #666; cursor: not-allowed; }
+
+    .loading {
+      text-align: center;
+      color: #666;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="media/video.mp4" type="video/mp4">
+  </video>
+
+  <div class="edit-page">
+    <div class="edit-card">
+      <div class="edit-header">
+        <div class="edit-header-logo">
+          <img src="media/drupal-coder.svg" alt="Drupal-coder">
+        </div>
+        <div style="display:flex; align-items:center;">
+          <span class="edit-user">Вы вошли как <strong id="user-login"></strong></span>
+          <button class="edit-logout" id="logout-btn">Выйти</button>
+        </div>
+      </div>
+
+      <h1 class="edit-title">Редактирование заявки</h1>
+      <p class="edit-subtitle">Измените данные и нажмите сохранить</p>
+
+      <div id="edit-status" class="edit-status"></div>
+      <div id="loading" class="loading">Загрузка данных...</div>
+
+      <form id="edit-form" novalidate style="display:none;">
+        <div class="edit-field">
+          <label>Имя</label>
+          <input type="text" id="edit-name" placeholder="Ваше имя">
+        </div>
+        <div class="edit-field">
+          <label>Телефон</label>
+          <input type="tel" id="edit-phone" placeholder="Телефон (необязательно)">
+        </div>
+        <div class="edit-field">
+          <label>Email</label>
+          <input type="email" id="edit-email" placeholder="E-mail">
+        </div>
+        <div class="edit-field">
+          <label>Комментарий</label>
+          <textarea id="edit-message" placeholder="Ваш комментарий"></textarea>
+        </div>
+
+        <button type="submit" id="edit-btn" class="edit-btn">СОХРАНИТЬ ИЗМЕНЕНИЯ</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const API = '/web_backend/task8/api.cgi';
+
+
+    // Проверяем авторизацию
+    const token = localStorage.getItem('jwt_token');
+    const userLogin = localStorage.getItem('user_login');
+
+
+    if (!token) {
+      window.location.href = 'login.html';
+    }
+
+    document.getElementById('user-login').textContent = userLogin || '';
+
+    // Выход
+    document.getElementById('logout-btn').addEventListener('click', function() {
+      localStorage.removeItem('jwt_token');
+      localStorage.removeItem('user_login');
+      window.location.href = 'login.html';
+    });
+
+    const statusEl = document.getElementById('edit-status');
+    const loadingEl = document.getElementById('loading');
+    const formEl = document.getElementById('edit-form');
+    const btn = document.getElementById('edit-btn');
+
+    function showStatus(msg, type) {
+      statusEl.textContent = msg;
+      statusEl.className = 'edit-status ' + type;
+    }
+
+// Загружаем текущие данные
+async function loadProfile() {
+    try {
+        const response = await fetch('/web_backend/task8/api.cgi?action=profile', {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Bearer ' + token
+            }
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+            // Не редиректим сразу — показываем ошибку
+            showStatus('Ошибка авторизации: ' + (data.error || 'неизвестная ошибка'), 'error');
+            loadingEl.style.display = 'none';
+            formEl.style.display = 'block';
+            return;
+        }
+        // Заполняем поля
+        document.getElementById('edit-name').value    = data.name    || '';
+        document.getElementById('edit-phone').value   = data.phone   || '';
+        document.getElementById('edit-email').value   = data.email   || '';
+        document.getElementById('edit-message').value = data.message || '';
+
+    } catch (err) {
+        showStatus('Ошибка загрузки данных', 'error');
+    } finally {
+        loadingEl.style.display = 'none';
+        formEl.style.display = 'block';
+    }
+}
+
+loadProfile();
+
+    // Отправка PUT
+    formEl.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('edit-name').value.trim();
+      const phone = document.getElementById('edit-phone').value.trim();
+      const email = document.getElementById('edit-email').value.trim();
+      const message = document.getElementById('edit-message').value.trim();
+
+      if (!name) {
+        showStatus('Имя обязательно для заполнения', 'error');
+        return;
+      }
+      if (!email) {
+        showStatus('Email обязателен для заполнения', 'error');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'СОХРАНЕНИЕ...';
+
+      try {
+        const response = await fetch(API, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+          },
+          body: JSON.stringify({ name, phone, email, message })
+        });
+
+        const data = await response.json();
+
+        if (!data.success) {
+          showStatus(data.error || 'Ошибка сохранения', 'error');
+          return;
+        }
+
+        showStatus('✅ Данные успешно обновлены!', 'success');
+
+      } catch (err) {
+        showStatus('Ошибка соединения', 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'СОХРАНИТЬ ИЗМЕНЕНИЯ';
+      }
+    });
+  </script>
+</body>
+</html>

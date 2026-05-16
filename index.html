@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web backend | Задания</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #ffe4ec 0%, #ffd9e4 100%);
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        /* основной контейнер — минимальный, воздушный */
+        .tasks-container {
+            max-width: 680px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(2px);
+            border-radius: 2rem;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 20px 35px -12px rgba(236, 72, 153, 0.15),
+                        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+            transition: all 0.2s ease;
+        }
+
+        /* заголовок — тонкий, но выразительный */
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #c4456c, #b8315a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1.75rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(200, 70, 110, 0.2);
+            display: inline-block;
+        }
+
+        /* список без маркеров */
+        .task-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        /* каждый элемент — минималистичная карточка */
+        .task-list li {
+            background: #ffffffcc;
+            backdrop-filter: blur(4px);
+            border-radius: 1.5rem;
+            transition: all 0.25s cubic-bezier(0.2, 0, 0, 1);
+            border: 1px solid rgba(255, 192, 203, 0.6);
+        }
+
+        .task-list li:hover {
+            background: #fff;
+            border-color: #f9acbc;
+            box-shadow: 0 6px 14px rgba(200, 70, 110, 0.12);
+            transform: translateX(4px);
+        }
+
+        /* ссылки — главный акцент, розовое настроение */
+        .task-list a {
+            display: block;
+            padding: 0.9rem 1.5rem;
+            text-decoration: none;
+            font-weight: 480;
+            font-size: 1.05rem;
+            color: #a13e5c;
+            transition: color 0.2s, padding 0.2s;
+            border-radius: 1.5rem;
+            letter-spacing: -0.2px;
+        }
+
+        .task-list a:hover {
+            color: #db3a6b;
+            padding-left: 1.8rem;
+            background: rgba(255, 225, 235, 0.5);
+        }
+
+        /* лёгкое подчеркивание для свежести */
+        .task-list a::before {
+            content: "✦";
+            display: inline-block;
+            margin-right: 12px;
+            font-size: 0.9rem;
+            color: #f27ea6;
+            opacity: 0.7;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+
+        .task-list a:hover::before {
+            transform: scale(1.1);
+            opacity: 1;
+            color: #e85d8b;
+        }
+
+        /* дополнительная атмосфера — маленькая деталь */
+        .tasks-container::after {
+            content: "◌ ◌ ◌";
+            display: block;
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            color: #e8a7bb;
+            opacity: 0.6;
+        }
+
+        /* адаптивность */
+        @media (max-width: 500px) {
+            body {
+                padding: 1rem;
+            }
+            .tasks-container {
+                padding: 1.8rem 1.2rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .task-list a {
+                padding: 0.7rem 1.2rem;
+                font-size: 0.95rem;
+            }
+            .task-list a:hover {
+                padding-left: 1.4rem;
+            }
+        }
+
+        /* лёгкое появление страницы */
+        .tasks-container {
+            animation: fadeSlideUp 0.5s ease-out;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="tasks-container">
+        <h1>Tasks</h1>
+        <ul class="task-list">
+            <li><a href="./task2/index.html">Task 2</a></li>
+            <li><a href="./task3/index.html">Task 3</a></li>
+            <li><a href="./task4/form.cgi">Task 4</a></li>
+            <li><a href="./task5/index.cgi">Task 5</a></li>
+            <li><a href="./task6/index.cgi">Task 6</a></li>
+            <li><a href="./task7/Отчет об аудите безопасности веб.pdf">Task 7</a></li>
+            <li><a href="./task8/index.html">Task 8</a></li>
+        </ul>
+    </div>
+</body>
+</html>

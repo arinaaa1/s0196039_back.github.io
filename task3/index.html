@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <link rel="stylesheet" href="style.css">
+        <meta charset="UTF-8">
+        <title>Форма</title>
+    </head>
+    <body>
+        <h1>Анкета</h1>
+        <form action="form.cgi" method="POST">
+            <p>
+                ФИО:<br>
+                <input type="text" name="name">
+            </p>
+            <p>
+                Телефон:<br>
+                <input type="tel" name="phone">
+            </p>
+            <p>
+                Email:<br>
+                <input type="email" name="email">
+            </p>
+            <p>
+                Дата рождения:<br>
+                <input type="date" name="birthdate">
+            </p>
+            <p>
+                Пол:<br>
+                <label><input type="radio" name="gender" value="male"> Мужской</label><br>
+                <label><input type="radio" name="gender" value="female"> Женский</label>
+            </p>
+            <p>
+            Любимый язык программирования:<br>
+                <select name="languages[]" multiple size="5">
+                    <option value="1">Pascal</option>
+                    <option value="2">C</option>
+                    <option value="3">C++</option>
+                    <option value="4">JavaScript</option>
+                    <option value="5">PHP</option>
+                    <option value="6">Python</option>
+                    <option value="7">Java</option>
+                    <option value="8">Haskell</option>
+                    <option value="9">Clojure</option>
+                    <option value="10">Prolog</option>
+                    <option value="11">Scala</option>
+                    <option value="12">Go</option>
+                </select>
+            </p>
+            <p>
+                Биография:<br>
+                <textarea name="bio"></textarea>
+            </p>
+            <p>
+                <label>
+                    <input type="checkbox" name="contract">
+                    С контрактом ознакомлен
+                </label>
+            </p>
+            <p>
+                <button type="submit">Сохранить</button>
+            </p>
+        </form>
+    </body>
+</html>
