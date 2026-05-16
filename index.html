@@ -21,7 +21,6 @@
             padding: 2rem;
         }
 
-        /* основной контейнер — минимальный, воздушный */
         .tasks-container {
             max-width: 680px;
             width: 100%;
@@ -34,7 +33,6 @@
             transition: all 0.2s ease;
         }
 
-        /* заголовок — тонкий, но выразительный */
         h1 {
             font-size: 2.2rem;
             font-weight: 500;
@@ -49,7 +47,6 @@
             display: inline-block;
         }
 
-        /* список без маркеров */
         .task-list {
             list-style: none;
             display: flex;
@@ -57,7 +54,6 @@
             gap: 0.85rem;
         }
 
-        /* каждый элемент — минималистичная карточка */
         .task-list li {
             background: #ffffffcc;
             backdrop-filter: blur(4px);
@@ -73,7 +69,6 @@
             transform: translateX(4px);
         }
 
-        /* ссылки — главный акцент, розовое настроение */
         .task-list a {
             display: block;
             padding: 0.9rem 1.5rem;
@@ -92,7 +87,6 @@
             background: rgba(255, 225, 235, 0.5);
         }
 
-        /* лёгкое подчеркивание для свежести */
         .task-list a::before {
             content: "✦";
             display: inline-block;
@@ -109,7 +103,6 @@
             color: #e85d8b;
         }
 
-        /* дополнительная атмосфера — маленькая деталь */
         .tasks-container::after {
             content: "◌ ◌ ◌";
             display: block;
@@ -121,7 +114,6 @@
             opacity: 0.6;
         }
 
-        /* адаптивность */
         @media (max-width: 500px) {
             body {
                 padding: 1rem;
@@ -141,7 +133,6 @@
             }
         }
 
-        /* лёгкое появление страницы */
         .tasks-container {
             animation: fadeSlideUp 0.5s ease-out;
         }

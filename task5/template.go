@@ -71,8 +71,8 @@ const formHTML = `
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: linear-gradient(145deg, #ffe4ec 0%, #ffd6e2 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -81,35 +81,41 @@ const formHTML = `
         }
 
         .card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.10);
-            padding: 40px;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(236, 72, 153, 0.12), 0 0 0 1px rgba(255, 245, 245, 0.7) inset;
+            padding: 2.2rem 2rem 2.5rem;
             width: 100%;
-            max-width: 560px;
+            max-width: 680px;
+            transition: all 0.2s ease;
         }
 
         h1 {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 28px;
-            text-align: center;
-            letter-spacing: -0.5px;
+            font-size: 2.1rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #c4456c, #b8315a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(200, 70, 110, 0.2);
+            display: inline-block;
         }
 
         .field {
-            margin-bottom: 20px;
+            margin-bottom: 1.5rem;
         }
 
         .field > label {
             display: block;
-            font-size: 13px;
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #9e4466;
+            margin-bottom: 0.4rem;
+            letter-spacing: -0.2px;
         }
 
         input[type="text"],
@@ -119,58 +125,55 @@ const formHTML = `
         select,
         textarea {
             width: 100%;
-            padding: 10px 14px;
-            border: 1.5px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 15px;
-            color: #222;
-            background: #fafafa;
-            transition: border-color 0.2s, background 0.2s;
-            outline: none;
+            padding: 0.8rem 1rem;
+            border: 1.5px solid #f3cdd8;
+            border-radius: 1.2rem;
+            font-size: 0.95rem;
             font-family: inherit;
+            background: #ffffffdd;
+            transition: all 0.2s ease;
+            outline: none;
+            color: #2d2a2b;
         }
 
         input:focus,
         select:focus,
         textarea:focus {
-            border-color: #2c7be5;
+            border-color: #e07c9e;
+            box-shadow: 0 0 0 3px rgba(224, 124, 158, 0.2);
             background: #fff;
         }
 
         .field-error input,
         .field-error select,
         .field-error textarea {
-            border-color: #e53e3e;
-            background: #fff5f5;
+            border-color: #e86c8c;
+            background: #fff5f7;
         }
 
         .field-error input:focus,
         .field-error select:focus,
         .field-error textarea:focus {
-            border-color: #c53030;
+            border-color: #d9537a;
         }
 
         .error-msg {
-            font-size: 12px;
-            color: #e53e3e;
-            margin-top: 5px;
+            font-size: 0.75rem;
+            color: #d94a73;
+            margin-top: 0.3rem;
+            margin-left: 0.5rem;
             display: flex;
             align-items: center;
             gap: 4px;
         }
 
         .error-msg::before {
-            content: "!";
+            content: "✦";
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 14px;
-            height: 14px;
-            background: #e53e3e;
-            color: white;
-            border-radius: 50%;
-            font-size: 10px;
-            font-weight: 700;
+            font-size: 0.7rem;
+            color: #e85d8b;
             flex-shrink: 0;
         }
 
@@ -181,136 +184,177 @@ const formHTML = `
 
         select[multiple] {
             height: 160px;
-            padding: 6px;
+            padding: 0.6rem;
+            border-radius: 1rem;
+            background: #ffffffdd;
         }
 
         select[multiple] option {
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 0.4rem 0.6rem;
+            border-radius: 0.8rem;
+            margin: 2px 0;
         }
 
         select[multiple] option:checked {
-            background: #2c7be5;
-            color: white;
+            background: #fbc1d2 linear-gradient(0deg, #f7a9c0 0%, #f7a9c0 100%);
+            color: #4a1e2f;
         }
 
         .radio-group {
             display: flex;
-            gap: 16px;
-            margin-top: 2px;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-top: 0.3rem;
         }
 
         .radio-group label,
         .checkbox-label {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 7px;
-            font-size: 15px;
+            gap: 0.5rem;
+            font-size: 0.95rem;
             font-weight: 400;
-            color: #333;
+            color: #a65472;
             cursor: pointer;
-            text-transform: none;
-            letter-spacing: 0;
         }
 
         input[type="radio"],
         input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: #2c7be5;
+            accent-color: #e36c92;
+            width: 1rem;
+            height: 1rem;
+            margin: 0;
             cursor: pointer;
         }
 
         .btn {
             width: 100%;
-            padding: 12px;
-            background: #2c7be5;
+            padding: 0.9rem;
+            background: linear-gradient(95deg, #e47297, #d95580);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: 2rem;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
-            margin-top: 8px;
-            transition: background 0.2s, transform 0.1s;
-            letter-spacing: 0.2px;
+            transition: all 0.25s ease;
+            margin-top: 0.6rem;
+            box-shadow: 0 4px 10px rgba(217, 85, 128, 0.2);
+            letter-spacing: 0.3px;
         }
 
         .btn:hover {
-            background: #1a5fc1;
-        }
-
-        .btn:active {
-            transform: scale(0.99);
+            background: linear-gradient(95deg, #dc5f88, #c9456f);
+            transform: scale(0.98);
+            box-shadow: 0 6px 14px rgba(217, 85, 128, 0.25);
         }
 
         .success-banner {
-            background: #f0fff4;
-            border: 1.5px solid #38a169;
-            border-radius: 8px;
-            padding: 14px 18px;
-            color: #276749;
-            font-size: 15px;
-            margin-bottom: 24px;
+            background: #fff0f3;
+            border: 1.5px solid #e38aa8;
+            border-radius: 1.2rem;
+            padding: 0.9rem 1.2rem;
+            color: #b6436a;
+            font-size: 0.9rem;
+            margin-bottom: 1.8rem;
             text-align: center;
             font-weight: 500;
         }
 
         .credentials-banner {
-            background: #fffbeb;
-            border: 1.5px solid #f6ad55;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 24px;
+            background: #fff0f3;
+            border: 1.5px solid #e38aa8;
+            border-radius: 1.2rem;
+            padding: 1.2rem;
+            margin-top: 1.5rem;
         }
 
         .credentials-banner h3 {
-            font-size: 16px;
-            color: #744210;
-            margin-bottom: 8px;
+            font-size: 1rem;
+            color: #b6436a;
+            margin-bottom: 0.5rem;
         }
 
         .credentials-banner p {
-            font-size: 13px;
-            color: #975a16;
-            margin-bottom: 12px;
+            font-size: 0.8rem;
+            color: #b35f7c;
+            margin-bottom: 0.8rem;
         }
 
         .cred-row {
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-bottom: 6px;
-            font-size: 15px;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
 
         .cred-label {
-            color: #744210;
-            font-size: 13px;
+            color: #9e4466;
+            font-size: 0.8rem;
             width: 60px;
         }
 
         .cred-row strong {
             font-family: monospace;
-            font-size: 16px;
-            background: #fef3c7;
-            padding: 2px 8px;
-            border-radius: 4px;
+            font-size: 0.9rem;
+            background: #ffe4ec;
+            padding: 0.2rem 0.6rem;
+            border-radius: 0.8rem;
             letter-spacing: 0.5px;
+            color: #c4456c;
         }
 
         .btn-login {
             display: inline-block;
-            margin-top: 12px;
-            padding: 8px 16px;
-            background: #2c7be5;
+            margin-top: 0.8rem;
+            padding: 0.4rem 1.2rem;
+            background: linear-gradient(95deg, #e47297, #d95580);
             color: white;
-            border-radius: 6px;
+            border-radius: 2rem;
             text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.2s;
         }
 
+        .btn-login:hover {
+            background: linear-gradient(95deg, #dc5f88, #c9456f);
+            transform: scale(0.96);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1.2rem;
+            }
+            .card {
+                padding: 1.6rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .radio-group {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.6rem;
+            }
+        }
+
+        .card {
+            animation: fadeSlideUp 0.45s ease-out;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>

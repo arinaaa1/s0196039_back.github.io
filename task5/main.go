@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("mysql", "u82944:dw4$Ewe2@tcp(localhost:3306)/u82944")
+	db, err := sql.Open("mysql", "u82356:9869396@tcp(localhost:3306)/u82356")
 	if err != nil {
 		log.Fatal("Error connecting to database:", err)
 	}

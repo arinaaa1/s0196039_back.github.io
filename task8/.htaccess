@@ -1,4 +1,4 @@
-SetEnv DB_DSN 	"u82944:dw4$Ewe2@tcp(localhost:3306)/u82944"
-SetEnv JWT_SECRET "it-is-the-most-top-secret-key-from-Epstein's-files brbrbr"
+SetEnv DB_DSN 	"u82356:9869396@tcp(localhost:3306)/u82356"
+SetEnv JWT_SECRET "arinaaa1_JWT_KEY"
 RewriteEngine On
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
