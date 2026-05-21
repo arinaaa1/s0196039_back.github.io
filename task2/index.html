@@ -2,18 +2,330 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web backend</title>
+    <title>Web backend – Task 2 (telnet)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+            background: linear-gradient(145deg, #ffe4ec 0%, #ffd6e2 100%);
+            padding: 2rem;
+            line-height: 1.5;
+            color: #2d2a2b;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* карточка для каждого задания */
+        .task-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(4px);
+            border-radius: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(236, 72, 153, 0.12), 0 0 0 1px rgba(255, 245, 245, 0.7) inset;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.2s ease;
+            animation: fadeSlideUp 0.45s ease-out;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            background: linear-gradient(135deg, #c4456c, #b8315a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            display: inline-block;
+            border-bottom: 2px solid rgba(200, 70, 110, 0.2);
+            padding-bottom: 0.3rem;
+        }
+
+        .subhead {
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 1.5rem;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0 1.5rem;
+            font-size: 0.95rem;
+            color: #b34e72;
+            border: 1px solid rgba(217, 85, 128, 0.2);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #c4456c;
+            margin: 1.5rem 0 1rem;
+            letter-spacing: -0.3px;
+        }
+
+        hr {
+            margin: 2rem 0;
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, #ffc0d0, transparent);
+        }
+
+        pre {
+            background: rgba(245, 225, 235, 0.7);
+            border: 1px solid #f3cdd8;
+            border-radius: 1.2rem;
+            padding: 1rem;
+            font-family: 'Fira Code', 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            color: #4a2e3a;
+            margin: 1rem 0;
+        }
+
+        p {
+            margin: 0.8rem 0;
+        }
+
+        strong {
+            color: #b8315a;
+            font-weight: 600;
+        }
+
+        code {
+            background: #ffe4ec;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.8rem;
+            font-size: 0.85rem;
+            color: #b34e72;
+        }
+
+        img {
+            max-width: 100%;
+            border-radius: 1.2rem;
+            border: 1px solid rgba(217, 85, 128, 0.3);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin: 1rem 0;
+            transition: transform 0.2s;
+        }
+
+        img:hover {
+            transform: scale(1.01);
+        }
+
+        .badge {
+            display: inline-block;
+            background: #fce4ec;
+            color: #c4456c;
+            border-radius: 2rem;
+            padding: 0.2rem 1rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 1rem;
+            }
+            .task-card {
+                padding: 1.2rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Task 2</h1>
-    <h2>Screenshots</h2>
-    <img src="screenshots/1.png" alt="Screenshot 1">
-    <img src="screenshots/2.png" alt="Screenshot 2">
-    <img src="screenshots/3.png" alt="Screenshot 3">
-    <img src="screenshots/4.png" alt="Screenshot 4">
-    <img src="screenshots/5.png" alt="Screenshot 5">
-    <img src="screenshots/6.png" alt="Screenshot 6">
-    <img src="screenshots/7.png" alt="Screenshot 7">
+<div class="container">
+    <div class="task-card">
+        <h1>Task 2 – выполнение через telnet</h1>
+        <div class="subhead">
+            Сервер: <strong>u82356.kubsu-dev.ru</strong><br>
+            Все запросы отправлялись через <code>telnet u82356.kubsu-dev.ru 80</code>.<br>
+            После заголовков обязательно пустая строка (два нажатия Enter).
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 1 -->
+    <div class="task-card">
+        <h2>1. GET главной страницы – HTTP/1.0</h2>
+        <p><strong>Запрос:</strong></p>
+        <pre>GET / HTTP/1.0
+Host: u82356.kubsu-dev.ru
+
+</pre>
+        <p><strong>Ответ (заголовки):</strong></p>
+        <pre>HTTP/1.1 200 OK
+Date: Wed, 20 May 2026 22:56:35 GMT
+Server: Apache/2.4.58 (Ubuntu)
+Vary: Accept-Encoding
+Content-Length: 1227
+Connection: close
+Content-Type: text/html;charset=UTF-8</pre>
+        <p><em>Тело ответа – HTML-код корневой страницы (1227 байт).</em></p>
+        <img src="screenshots/1.png" alt="Скриншот задания 1">
+    </div>
+
+    <!-- ЗАДАНИЕ 2 -->
+    <div class="task-card">
+        <h2>2. GET внутренней страницы – HTTP/1.1</h2>
+        <p><strong>Запрос:</strong></p>
+        <pre>GET /s0196039_back.github.io/task2/ HTTP/1.1
+Host: u82356.kubsu-dev.ru
+
+</pre>
+        <p><strong>Ответ (заголовки + тело):</strong></p>
+        <pre>HTTP/1.1 200 OK
+Date: Wed, 20 May 2026 23:01:57 GMT
+Server: Apache/2.4.58 (Ubuntu)
+Last-Modified: Sat, 16 May 2026 19:35:47 GMT
+ETag: "26b-651f46fa4235e"
+Accept-Ranges: bytes
+Content-Length: 619
+Vary: Accept-Encoding
+Content-Type: text/html
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="ru"&gt;
+&lt;head&gt;...&lt;title&gt;Web backend&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Task 2&lt;/h1&gt;
+&lt;h2&gt;Screenshots&lt;/h2&gt;
+...
+&lt;/body&gt;&lt;/html&gt;</pre>
+        <img src="screenshots/2.png" alt="Скриншот задания 2">
+    </div>
+
+    <!-- ЗАДАНИЕ 3 -->
+    <div class="task-card">
+        <h2>3. Размер file.tar.gz (HEAD, без скачивания)</h2>
+        <p><strong>Запрос:</strong></p>
+        <pre>HEAD /s0196039_back.github.io/task2/file.tar.gz HTTP/1.1
+Host: u82356.kubsu-dev.ru
+
+</pre>
+        <p><strong>Ответ:</strong></p>
+        <pre>HTTP/1.1 200 OK
+Date: Wed, 20 May 2026 23:02:27 GMT
+Server: Apache/2.4.58 (Ubuntu)
+Last-Modified: Sat, 16 May 2026 19:35:47 GMT
+ETag: "2c47-651f46fa41f76"
+Accept-Ranges: bytes
+Content-Length: 11335
+Content-Type: application/x-gzip</pre>
+        <p><strong>Размер файла:</strong> 11335 байт.</p>
+        <img src="screenshots/3.png" alt="Скриншот задания 3">
+    </div>
+
+    <!-- ЗАДАНИЕ 4 -->
+    <div class="task-card">
+        <h2>4. Медиатип /image.png</h2>
+        <p><strong>Запрос:</strong></p>
+        <pre>HEAD /s0196039_back.github.io/task2/image.png HTTP/1.1
+Host: u82356.kubsu-dev.ru
+
+</pre>
+        <p><strong>Ответ:</strong></p>
+        <pre>HTTP/1.1 200 OK
+Date: Wed, 20 May 2026 23:02:49 GMT
+Server: Apache/2.4.58 (Ubuntu)
+Last-Modified: Sat, 16 May 2026 19:35:47 GMT
+ETag: "290a-651f46fa4235e"
+Accept-Ranges: bytes
+Content-Length: 10506
+Content-Type: image/png</pre>
+        <p><strong>Медиатип:</strong> image/png</p>
+        <img src="screenshots/4.png" alt="Скриншот задания 4">
+    </div>
+
+    <!-- ЗАДАНИЕ 5 -->
+    <div class="task-card">
+        <h2>5. Отправить комментарий в /index.php (POST)</h2>
+        <p><strong>Запрос:</strong></p>
+        <pre>POST /s0196039_back.github.io/task2/index.php HTTP/1.1
+Host: u82356.kubsu-dev.ru
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 13
+
+comment=Hello</pre>
+        <p><strong>Ответ:</strong></p>
+        <pre>HTTP/1.1 404 Not Found
+Date: Wed, 20 May 2026 23:03:18 GMT
+Server: Apache/2.4.58 (Ubuntu)
+Content-Length: 55
+Content-Type: text/html; charset=UTF-8
+
+Array
+(
+    [comment] => Hello
+)
+
+Привет, мир!</pre>
+        <p><em>Скрипт выполнился, комментарий принят (несмотря на 404).</em></p>
+        <img src="screenshots/5.png" alt="Скриншот задания 5">
+    </div>
+
+    <!-- ЗАДАНИЕ 6 -->
+    <div class="task-card">
+        <h2>6. Получить первые 100 байт file.tar.gz (Range)</h2>
+        <p><strong>Запрос:</strong></p>
+        <pre>GET /s0196039_back.github.io/task2/file.tar.gz HTTP/1.1
+Host: u82356.kubsu-dev.ru
+Range: bytes=0-99
+
+</pre>
+        <p><strong>Ответ:</strong></p>
+        <pre>HTTP/1.1 206 Partial Content
+Date: Wed, 20 May 2026 23:03:44 GMT
+Server: Apache/2.4.58 (Ubuntu)
+Last-Modified: Sat, 16 May 2026 19:35:47 GMT
+ETag: "2c47-651f46fa41f76"
+Accept-Ranges: bytes
+Content-Length: 100
+Content-Range: bytes 0-99/11335
+Content-Type: application/x-gzip
+
+[бинарные данные – первые 100 байт архива]</pre>
+        <img src="screenshots/6.png" alt="Скриншот задания 6">
+    </div>
+
+    <!-- ЗАДАНИЕ 7 -->
+    <div class="task-card">
+        <h2>7. Определить кодировку /index.php</h2>
+        <p><strong>Запрос:</strong></p>
+        <pre>HEAD /s0196039_back.github.io/task2/index.php HTTP/1.1
+Host: u82356.kubsu-dev.ru
+
+</pre>
+        <p><strong>Ответ:</strong></p>
+        <pre>HTTP/1.1 404 Not Found
+Date: Wed, 20 May 2026 23:04:10 GMT
+Server: Apache/2.4.58 (Ubuntu)
+Content-Type: text/html; charset=UTF-8</pre>
+        <p><strong>Кодировка:</strong> UTF-8 (параметр charset в Content-Type).</p>
+        <img src="screenshots/7.png" alt="Скриншот задания 7">
+    </div>
+</div>
 </body>
 </html>
